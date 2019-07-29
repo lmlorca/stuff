@@ -1,8 +1,7 @@
 const Post = require('./post')
-const uuid = require('uuid')
 
-module.exports = async function addPost({ postRepo, post }) {
-    const postId = uuid()
+module.exports = async function addPost({ postRepo, generateId, post }) {
+    const postId = generateId()
     const newPost = new Post({
         id: postId,
         title: post.title,
