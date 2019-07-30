@@ -7,9 +7,13 @@ const path = require('path')
 module.exports = (function() {
     function PostRepository() {
         ;(function() {
-            const csvFile = path.join(__dirname, '../db', 'posts.csv')
-            if (!fs.existsSync(csvFile)) {
-                fs.writeFileSync(csvFile, `"id","text","title","createdOn"`)
+            const dbPath = path.join(__dirname, '../db')
+            if (!fs.existsSync(dbPath)) {
+                fs.mkdirSync(dbPath)
+                fs.writeFileSync(
+                    path.join(dbPath, 'posts.csv'),
+                    `"id","text","title","createdOn"`
+                )
             }
         })()
     }
