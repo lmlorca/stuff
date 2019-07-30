@@ -1,3 +1,5 @@
+const Post = require('./post')
+
 module.exports = (function() {
     function PostInteractor({ postRepo, post }) {
         if (!postRepo) throw new Error('Must include repo')
@@ -14,14 +16,15 @@ module.exports = (function() {
 
     PostInteractor.prototype.addPost = function({ post = this.post }) {
         const postId = this.postRepo.generateId()
+
         const newPost = new Post({
             id: postId,
-            title: this.post.title,
-            text: this.post.text
+            title: post.title,
+            text: post.text
         })
-        this.postRepo
-            .save(newPost)
-            .then(() => console.log('Post saved'))
+        return this.postRepo
+            .save({ newPost })
+            .then(createdPost => createdPost)
             .catch(err => console.log(err))
     }
 
