@@ -1,11 +1,10 @@
-const getPosts = require('./get-posts')
-const addPost = require('./add-post')
+module.exports = (function() {
+    function PostController({ postInter }) {
+        this.postInter = postInter
+    }
+    PostController.prototype.getPosts = async function() {
+        return await this.postInter.getAllPosts()
+    }
 
-exports.writePostToCSV = addPost(async function({ post }) {
-    // Implementation
-    // Write to CSV
-})
-exports.findAllPostFromCSV = getPosts(async function() {
-    // Implementation
-    // Read from CVS
-})
+    return PostController
+})()
