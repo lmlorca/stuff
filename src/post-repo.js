@@ -47,6 +47,11 @@ module.exports = (function() {
                 .catch(err => reject(err))
         })
     }
+    PostRepository.prototype.findById = async function({ postId }) {
+        const all = await this.findAll()
+
+        return all.find(post => post.id == postId)
+    }
 
     return PostRepository
 })()

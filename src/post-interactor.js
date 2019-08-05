@@ -14,6 +14,10 @@ module.exports = (function() {
             .catch(err => console.log(err))
     }
 
+    PostInteractor.prototype.getPostById = function({ postId }) {
+        return this.postRepo.findById({ postId }).then(post => post)
+    }
+
     PostInteractor.prototype.addPost = function({ post = this.post }) {
         const postId = this.postRepo.generateId()
 
